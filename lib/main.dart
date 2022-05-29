@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marvel_characters_app/fetaure/view/detail_view.dart';
-import 'package:marvel_characters_app/fetaure/view/home_view.dart';
+import 'package:marvel_characters_app/feature/view/home_view.dart';
 import 'package:marvel_characters_app/fetaure/view_model/home_view_model.dart';
 import 'package:marvel_characters_app/product/constant/my_color.dart';
 import 'package:provider/provider.dart';
