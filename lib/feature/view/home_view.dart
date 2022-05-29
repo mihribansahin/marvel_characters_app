@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_characters_app/feature/view/detail_view.dart';
-import 'package:marvel_characters_app/fetaure/view_model/home_view_model.dart';
+import 'package:marvel_characters_app/feature/view_model/home_view_model.dart';
 import 'package:marvel_characters_app/product/model/chars_model.dart';
 import 'package:provider/provider.dart';
 
@@ -63,51 +63,52 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  GridView characterListWidget(
-    BuildContext context,
-  ) {
+  Scrollbar characterListWidget(BuildContext context,) {
     final character = context.watch<HomeViewModel>().charsModel;
-    print("test count:${character!.data!.count}");
-    print("Media width:${MediaQuery.of(context).size.width}");
+   
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    return GridView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: (() {
-            if (screenWidth < 400) {
-              return 2;
-            } else if (screenWidth > 400 && screenWidth < 700) {
-              return 3;
-            }
-            return 5;
-          }()),
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 30,
-          childAspectRatio: cardWidth / cardHeight),
-      shrinkWrap: true,
-      itemCount: character.data!.results!.length,
-      itemBuilder: (BuildContext ctx, i) {
-        return InkWell(
-            onTap: () {
-              print(character.data!.results![i].id!);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => DetailView(
-                          resultModel: character.data!.results![i],
-                        )),
-              );
-            },
-            child: CharacterCard(
-                cardHeight: cardHeight,
-                cardWidth: cardWidth,
-                characterName: character.data!.results![i].name!,
-                characterPathUrl: character.data!.results![i].thumbNail!.path! +
-                    "." +
-                    character.data!.results![i].thumbNail!.extension!));
-      },
+    return Scrollbar(
+      isAlwaysShown: true,
+      child: GridView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: (() {
+              if (screenWidth < 400) {
+                return 2;
+              } else if (screenWidth > 400 && screenWidth < 700) {
+                return 3;
+              }
+              return 5;
+            }()),
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 30,
+            childAspectRatio: cardWidth / cardHeight),
+        shrinkWrap: true,
+        itemCount: character!.data!.results!.length,
+        itemBuilder: (BuildContext ctx, i) {
+          return InkWell(
+              onTap: () {
+                print(character.data!.results![i].id!);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetailView(
+                            resultModel: character!.data!.results![i],
+                          )),
+                );
+              },
+              child: CharacterCard(
+                  cardHeight: cardHeight,
+                  cardWidth: cardWidth,
+                  characterName: character!.data!.results![i].name!,
+                  characterPathUrl:
+                      character.data!.results![i].thumbNail!.path! +
+                          "." +
+                          character.data!.results![i].thumbNail!.extension!));
+        },
+      ),
     );
   }
 

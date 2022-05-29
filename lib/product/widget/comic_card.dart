@@ -18,8 +18,9 @@ class ComicCard extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.grey.shade800,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(10.0),
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(15.0),
+          bottomRight: Radius.circular(15.0),
         ),
         boxShadow: const [
           BoxShadow(
@@ -27,7 +28,7 @@ class ComicCard extends StatelessWidget {
             spreadRadius: 1,
             blurStyle: BlurStyle.outer,
             blurRadius: 3,
-            offset: Offset(5, 6), // changes position of shadow
+            offset: Offset(7, 6), // changes position of shadow
           ),
         ],
       ),

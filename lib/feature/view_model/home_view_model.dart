@@ -8,7 +8,6 @@ import '../../product/constant/enum/status_enum.dart';
 class HomeViewModel with ChangeNotifier {
   Status? _status;
   CharsModel? charsModel;
-  int totalPages = 0;
 
   HomeViewModel() {
     charsModel = CharsModel();

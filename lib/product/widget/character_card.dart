@@ -23,15 +23,18 @@ class CharacterCard extends StatelessWidget {
       constraints: const BoxConstraints(maxHeight: 300, maxWidth: 100),
       decoration: BoxDecoration(
         color: Colors.black,
-        borderRadius: const BorderRadius.only(
-          bottomRight: Radius.circular(40.0),
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(30.0),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade600,
-            spreadRadius: 2,
-            blurRadius: 1,
-            offset: Offset(1, 0), // changes position of shadow
+            color: MyColors.marvelRed.withOpacity(0.2),
+            spreadRadius: 1,
+            blurStyle: BlurStyle.inner,
+            blurRadius: 2,
+            offset: Offset(5, 3),
+
+            /// changes position of shadow
           ),
         ],
       ),
@@ -53,9 +56,10 @@ class CharacterCard extends StatelessWidget {
             flex: 2,
             child: Container(
               alignment: Alignment.topLeft,
-              margin: const EdgeInsets.only(left: 5, top: 5),
+              margin: const EdgeInsets.only(left: 7, top: 10),
               child: Text(
                 characterName,
+                maxLines: 2,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 15,

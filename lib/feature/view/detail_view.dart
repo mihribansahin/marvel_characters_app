@@ -25,8 +25,6 @@ class DetailView extends StatelessWidget {
 
   final DetailViewModel _detailViewModel = DetailViewModel();
 
-  List<ComicCard> comicCardList = [];
-
   bool _comicDate2005Control(String date) {
     if (Global.isNumeric(date)) {
       if (int.parse(date) > 2005) {
@@ -52,58 +50,58 @@ class DetailView extends StatelessWidget {
 
   Column bodyColumn(BuildContext context) {
     return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              characterImageHeaderWidget(context),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      resultModel!.name ?? "No Name",
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    descriptionWidget(resultModel: resultModel),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      "Comics",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: MyColors.marvelRed,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Container(
-                      height: 1,
-                      color: MyColors.marvelRed,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    comicsWidget()
-                  ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          characterImageHeaderWidget(context),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  resultModel!.name ?? "No Name",
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-            ]);
+                const SizedBox(
+                  height: 10,
+                ),
+                descriptionWidget(resultModel: resultModel),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "Comics",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: MyColors.marvelRed,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Container(
+                  height: 1,
+                  color: MyColors.marvelRed,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                comicsWidget()
+              ],
+            ),
+          ),
+        ]);
   }
 
   Container comicsWidget() {
@@ -112,11 +110,12 @@ class DetailView extends StatelessWidget {
       child: RawScrollbar(
         thumbColor: MyColors.marvelRed,
         radius: const Radius.circular(20),
-        thickness: 2,
+        thickness: 1,
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          reverse: true,
+          reverse: false,
+          physics: const BouncingScrollPhysics(),
           itemCount: resultModel!.comics!.comicItem!.length < 10
               ? resultModel!.comics!.comicItem!.length
               : 10,
