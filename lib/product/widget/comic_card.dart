@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marvel_characters_app/product/constant/my_color.dart';
 
 class ComicCard extends StatelessWidget {
   String comicName = " ";
@@ -20,12 +21,13 @@ class ComicCard extends StatelessWidget {
         borderRadius: const BorderRadius.all(
           Radius.circular(10.0),
         ),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: Colors.grey.shade600,
+            color: MyColors.marvelRed,
             spreadRadius: 1,
-            blurRadius: 2,
-            offset: const Offset(2, 2), // changes position of shadow
+            blurStyle: BlurStyle.outer,
+            blurRadius: 3,
+            offset: Offset(5, 6), // changes position of shadow
           ),
         ],
       ),
@@ -33,15 +35,17 @@ class ComicCard extends StatelessWidget {
           child: Column(
         children: [
           Expanded(
-            flex: 3,
+            flex: 4,
             child: Align(
                 child: Text(
               comicName,
               textAlign: TextAlign.center,
-              overflow: TextOverflow.visible,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 4,
               style: TextStyle(
-                fontSize: 15,
+                fontSize: 14,
                 color: Colors.grey.shade100,
+                letterSpacing: 2,
               ),
             )),
           ),
@@ -50,12 +54,13 @@ class ComicCard extends StatelessWidget {
             child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Text(
-                  comicDate,
+                  comicDate.toString(),
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.visible,
                   style: TextStyle(
                     fontSize: 13,
                     color: Colors.grey.shade300,
+                    letterSpacing: 2,
                   ),
                 )),
           ),

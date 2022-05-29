@@ -1,20 +1,34 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:marvel_characters_app/fetaure/detail/view/detail_view.dart';
-import 'package:marvel_characters_app/fetaure/home/viewModel/home_view_model.dart';
+import 'package:marvel_characters_app/fetaure/view/detail_view.dart';
+import 'package:marvel_characters_app/fetaure/view_model/home_view_model.dart';
 import 'package:marvel_characters_app/product/model/chars_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../../product/service/status.dart';
-import '../../../product/widget/character_card.dart';
+import '../../product/constant/enum/status_enum.dart';
+import '../../product/widget/character_card.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   HomeView({Key? key}) : super(key: key);
+  static const _pageSize = 20;
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   double cardHeight = 300, cardWidth = 200;
+
   List<CharsModel>? charItems;
+
   final HomeViewModel _homeViewModel = HomeViewModel();
 
   List<Widget> charCard = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,13 +67,11 @@ class HomeView extends StatelessWidget {
     BuildContext context,
   ) {
     final character = context.watch<HomeViewModel>().charsModel;
-    print("mihri name:${character!.data!.results![0].name}");
-
-    print(
-        "mihri path:${character.data!.results![0].thumbNail!.path! + "." + character.data!.results![0].thumbNail!.extension!}");
-
+    print("test count:${character!.data!.count}");
     print("Media width:${MediaQuery.of(context).size.width}");
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return GridView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -68,22 +80,24 @@ class HomeView extends StatelessWidget {
               return 2;
             } else if (screenWidth > 400 && screenWidth < 700) {
               return 3;
-            } else
-              return 5;
-            // your code here
+            }
+            return 5;
           }()),
           crossAxisSpacing: 20,
           mainAxisSpacing: 30,
           childAspectRatio: cardWidth / cardHeight),
       shrinkWrap: true,
-      itemCount: character.data!.count!,
+      itemCount: character.data!.results!.length,
       itemBuilder: (BuildContext ctx, i) {
         return InkWell(
             onTap: () {
-              print(i);
+              print(character.data!.results![i].id!);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const DetailView()),
+                MaterialPageRoute(
+                    builder: (context) => DetailView(
+                          resultModel: character.data!.results![i],
+                        )),
               );
             },
             child: CharacterCard(
@@ -100,13 +114,16 @@ class HomeView extends StatelessWidget {
   Container headerWidget(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * .3,
+      width: MediaQuery.of(context).size.width,
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/marvel_background.jpg',
-              fit: BoxFit.fitWidth,
+          Container(
+            child: Positioned.fill(
+              child: Image.asset(
+                'assets/images/marvel_background.jpg',
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
           Positioned(

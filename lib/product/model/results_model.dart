@@ -8,8 +8,6 @@ class ResultModel {
   String? description;
   ThumbnailModel? thumbNail;
   ComicModel? comics;
-
-  ThumbnailModel? thumbnailModel;
   ResultModel(
       {this.id, this.name, this.description, this.thumbNail, this.comics});
 

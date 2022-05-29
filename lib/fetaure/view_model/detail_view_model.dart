@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:marvel_characters_app/product/service/network_api_service.dart';
+import 'package:marvel_characters_app/product/service/api_service.dart';
 
 class DetailViewModel extends ChangeNotifier{
 

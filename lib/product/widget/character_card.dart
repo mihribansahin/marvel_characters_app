@@ -39,7 +39,7 @@ class CharacterCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
-            flex: 5,
+            flex: 4,
             child: Image.network(
               characterPathUrl,
               fit: BoxFit.fill,
